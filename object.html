@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>js面向对象</title>
+</head>
+
+<body>
+  <script>
+    var Person = function (living, age, gender) {
+      this.living = living; //this指代即将被创建的新对象
+      this.age = age;
+
+      this.gender = gender;
+      this.getGender = function () {
+        return this.gender;
+      };
+    };
+    var yangnan = new Person(true, 20, 'woman'); //实例化Person对象
+    console.log(yangnan); //实例是赋值后的对象
+    console.log(yangnan.gender);
+    console.log(yangnan.age);
+    console.log(yangnan.getGender);
+    console.log(yangnan.prototype);
+  </script>
+
+</body>
+
+</html>

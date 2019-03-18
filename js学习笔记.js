@@ -24,7 +24,7 @@ document.body.appendChild('para');
 doucument.addEventListener(DOMContentLoaded, function () {});
 // DOMContentLoaded
 
-input.focus() //定位光标
+input.focus(); //定位光标
 
 //生成随机数
 num = Math.floor(Math.random() * 100); //生产一个0-99的数值,包括1和9[(函数floor()]
@@ -41,7 +41,7 @@ num = Math.floor(Math.random() * 100); //生产一个0-99的数值,包括1和9[(
 
 // 一元运算符, 如果操作数在之前不是number， 试图将其转换为number
 var a = "123";
-b = +a;
+var b = +a;
 typeof (b); //返回'number'
 
 //三元运算符
@@ -194,15 +194,13 @@ function Person(name, age, gender, interest, bio, greeeting) {
   this.greeting = function () {
     alert(this.name);
   };
-};
-
-
+}
 
 // 1. 所有的对象都是一个关联数组
-  object[index] = object.index;
+object[index] = object.index;
 // 2. 给对象添加新的成员:
 object.name = 'kate';
-ovject.fun = function () { };
+ovject.fun = function () {};
 
 //一个对象的实例其实也是一个命名空间,如:
 object.name = 'kate';
@@ -210,7 +208,7 @@ object.name = 'kate';
 
 // 创建对象的方式:
 // 1.
-var person1 = new Person(name,age,gender,['music','skiing']);
+var person1 = new Person(name, age, gender, ['music', 'skiing']);
 // 2.用Object()构造函数的方法
 var person2 = new Object();
 person2.name = 'kate';
@@ -221,4 +219,33 @@ person2['age'] = 32; //用关联数组的方式表示属性
 //3.根据其他一个对象创建一个新的对象,用create()方法
 var person3 = Object.create(person2);
 
+//4.直接定义对象实例
+var person4 = {
+  name: jack,
+  age: 32,
+  gender: male
+};
+
+//5.从其他对象的构造函数定义一个对象.因为每个实例对象都从原型中继承了一个constructor属性,改属性指向了用于构造此实例的构造函数.如果你刚好因为某些原因没有原始构造器的引用，那么这种方法就很有用了。
+var person5 = new person1.constructor('ken', '23', 'man');
+
+
 //对函数的理解:每个函数都是对象,包含以下:length:0,name:函数名,caller以及arguments等属性.还有一个特殊属性prototype,这个特殊的成员其实是一个构造函数,里面包括许多的属性和方法.这些属性和方法可以供本函数对象使用.
+
+/* 注意: 一种常见的对象定义模式是, 在构造体(函数体)中定义属性, 在prototype属性上定义方法.如此构造器只包含属性定义, 而方法则分装在不同的代码块中, 代码更具可读性.例如: */
+// 构造器及其属性定义
+function Test(a, b, c, d) {
+  // 属性定义
+};
+// 定义第一个方法
+Test.prototype.x = function () {
+  //函数体
+};
+// 定义第二个方法
+Test.prototype.y = function () {
+  // 函数体
+};
+// 等等……
+
+// 进一步理解命名空间
+// 通常我们定义一个函数,能被谁调用呢?这通常会涉及命名空间的问题.每个命名空间其实就是一个对象.定义的函数会成为命名空间这个对象的一个方法,所以,只有这个命名空间才能调用这个函数.通常定义的全局函数,都是位于window对象中(用window.abc()调用,因为window可以省略,所以,直接用abc()就可以调用了).
