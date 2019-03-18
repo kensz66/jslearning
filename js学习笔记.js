@@ -185,16 +185,19 @@ console.log(popped);
 //====================== 对象  ============================
 /* 对象成员其实包括2个内容: 一个是这个成员的名称(或者说是代表这个成员的变量, 其实这个值也是用变量的形式存在内存中的.又可以被称为对象的一个属性, 又或者可以说是关联了一个值的索引), 其次是这个成员的值.
  */
-function Person(name, age, gender, interest, bio, greeeting) {
-  this.name = name;
-  this.age = age;
-  this.gender = gender;
-  this.interest = interest;
-  this.bio = bio;
-  this.greeting = function () {
-    alert(this.name);
-  };
-}
+
+
+
+var person2 = {
+  name: 'ken',
+  age: 22,
+  gender: 'man'
+};
+console.log(penson2);
+
+
+
+
 
 // 1. 所有的对象都是一个关联数组
 object[index] = object.index;
@@ -206,29 +209,47 @@ ovject.fun = function () {};
 object.name = 'kate';
 //object就是变量name的命名空间.this其实就是指某个命名空间
 
-// 创建对象的方式:
-// 1.
-var person1 = new Person(name, age, gender, ['music', 'skiing']);
+
+
+
+// ++++++++++++++++++++创建对象的方式++++++++++++++++++++
+// 1.通过构造创建对象
+function Person(name, age, gender) {
+  this.name = name;
+  this.age = age;
+  this.gender = gender;
+  this.greeting = function () {
+    alert(this.name);
+  };
+}
+var person1 = new Person('ken', 22, 'man');
+console.log(person1);
+
 // 2.用Object()构造函数的方法
 var person2 = new Object();
-person2.name = 'kate';
-person2.greeting = function () {};
-person2['say'] = function () {};
-person2['age'] = 32; //用关联数组的方式表示属性
+person2.name = 'ken';
+person2['age'] = 22; //用关联数组的方式表示属性
+person2.gender = 'man';
+person2.greeting = function () {
+  alert(this.name);
+};
+console.log(person2);
 
-//3.根据其他一个对象创建一个新的对象,用create()方法
-var person3 = Object.create(person2);
+//3.根据其他一个对象创建一个新的对象,用Object.create()方法
+var person3 = Object.create(person1);
+console.log(person3);
 
 //4.直接定义对象实例
 var person4 = {
-  name: jack,
-  age: 32,
-  gender: male
+  name: 'ken',
+  age: 22,
+  gender: 'man'
 };
+console.log(person4);
 
-//5.从其他对象的构造函数定义一个对象.因为每个实例对象都从原型中继承了一个constructor属性,改属性指向了用于构造此实例的构造函数.如果你刚好因为某些原因没有原始构造器的引用，那么这种方法就很有用了。
-var person5 = new person1.constructor('ken', '23', 'man');
-
+//5.从其他对象的构造函数定义一个对象.因为每个实例对象都从原型中继承了一个constructor属性,该属性指向了用于构造此实例的构造函数.如果你刚好因为某些原因没有原始构造器的引用，那么这种方法就很有用了。
+var person5 = new person1.constructor('ken', '22', 'man');
+console.log(person5);
 
 //对函数的理解:每个函数都是对象,包含以下:length:0,name:函数名,caller以及arguments等属性.还有一个特殊属性prototype,这个特殊的成员其实是一个构造函数,里面包括许多的属性和方法.这些属性和方法可以供本函数对象使用.
 
@@ -249,3 +270,39 @@ Test.prototype.y = function () {
 
 // 进一步理解命名空间
 // 通常我们定义一个函数,能被谁调用呢?这通常会涉及命名空间的问题.每个命名空间其实就是一个对象.定义的函数会成为命名空间这个对象的一个方法,所以,只有这个命名空间才能调用这个函数.通常定义的全局函数,都是位于window对象中(用window.abc()调用,因为window可以省略,所以,直接用abc()就可以调用了).
+
+// 函数的length属性就是形参的个数.
+
+// 理解原型对象与构造函数
+/*
+1.原型对象是属于对象的对象;
+2.原型对象是一个特殊对象, 用于保存可以被复用的属性和方法;
+3.每个对象都有一个原型对象.
+4.如果一个对象是通过构造函数创建, 则构造函数会成为原型对象的一个子成员, 这样构造函数才得以保存和复用(对象的不同类型,包含了不同的原生方法,这些方法也会不储存在对象的另外一个原型对象中(以灰色表示)).
+5.原型对象本身也是一个对象,所以也有一个子原型对象,此原型对象其实就是Object,所以Object中的方法和属性在所有的对象中都可以被调用.
+6.构造函数的原型对象中包括自己本身构造函数和Object原型对象.
+7.总结以上:每个对象的内容可以包括三方面:1:由程序员创建的项,2:由对象的类型本身带的项,3:由对象Object自带的项.
+*/
+
+//============构造函数的继承================
+function Person(name, age, gender){
+  this.name = name;
+  this.age = age;
+  this.gender = gender;
+};
+Person.prototype.greeting = function () {
+  alert(this.name);
+};
+//Person构造函数创建完毕;
+
+function Teacher(name, age, gender, subject) {
+  Person.call(this, name,age,gender);
+//或者 Person.apply(this,[name,age,gender])
+  this.subject = subject;
+};
+Teacher.prototype = Object.create(Person.prototype); //通过Object.create()继承原型对象.到这一步为止,现在Teacher()的prototype的constructor属性指向的是Person(),这不正常,所以要增加下面一句.
+Teacher.prototype.constructor = Teacher; //改变构造函数的指向(让构造函数执行Teacher,而不是Person.如果不改变指向,调用原型中的方法结果不变,但是是通过调用Person的原型对象中的方法执行的,而不是Teacher自身的)
+//Teacher 构造函数创建完毕
+
+var teacher1 = new Teacher('song', 35, 'male', 'English');
+teacher1.greeting();
