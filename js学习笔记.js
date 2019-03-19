@@ -9,9 +9,6 @@ name = prompt();
 
 x = multiply(4, 5);
 
-setAttribute('src', 'http://www.v-in.net');
-getAttribute('class', 'classname');
-
 localStorage.setItem(variable, 'name');
 localStorage.getItem();
 
@@ -310,3 +307,46 @@ teacher1.greeting();
 
 
 // 如果您开始创建一系列拥有相似特性的对象时，那么创建一个包含所有共有功能的通用对象，然后在更特殊的对象类型中继承这些特性，将会变得更加方便有用。
+
+
+
+/* ==================================================
+
+  web浏览器 操作DOM
+
+  =================================================== */
+
+
+// window对象
+  //操作载入窗口的文档，存储客户端上文档的特殊数据（例如使用本地数据库或其他存储设备），为当前窗口绑定event handler，等等
+  var width=window.innerWidth;
+  var height = window.innerHeight;
+  //Navigator 对象
+  //可以用这个对象获取一些信息，比如来自用户摄像头的地理信息、用户偏爱的语言、多媒体流等等
+  //document 对象 是载入窗口的实际页面
+
+
+// DOM的增删改查
+// 1.查: document.querySelector()\queryselectorAll()\
+// 2.增: document.createElement('p'); => node.textContent='文本' 或者 creatTextNode('文本');=>node.appendChild();
+// 3.删和移动:
+// 删除节点:Node.removeChild()或者将节点移动到另外一个节点(用 appendChild('要移动的引用元素').)
+// 如果要复制节点, 用Node.cloneNode()方法.
+// 删除自身节点: selfNode.parentNode.removeChild('selNode');
+
+//操作样式
+/*
+添加元素内部样式
+eldment.style.color = 'white';
+para.style.backgroundColor = 'black';
+para.style.padding = '10px';
+para.style.width = '250px';
+para.style.textAlign = 'center';
+*/
+// 添加class
+// element.setAttribute('class', 'classname');
+// 删除属性:element.removeAttribute(),返回underfined,所以不能用链式方法.
+/* setAttribute('src', 'http://www.v-in.net');
+getAttribute('attrName');
+removeAttribute('attrName'); */
+
