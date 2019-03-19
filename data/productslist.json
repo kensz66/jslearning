@@ -1,0 +1,19 @@
+{
+  "products": [
+    {
+      "title":"产品1",
+      "src":"/images/pro1.jpg",
+      "info":"纯棉面料"
+    },
+    {
+      "title":"产品2",
+      "src":"/images/pro2.jpg",
+      "info":"涤棉面料"
+    },
+    {
+      "title":"产品3",
+      "src":"/images/pro3.jpg",
+      "info":"莫代尔面料"
+    }
+  ]
+}

@@ -306,3 +306,7 @@ Teacher.prototype.constructor = Teacher; //改变构造函数的指向(让构造
 
 var teacher1 = new Teacher('song', 35, 'male', 'English');
 teacher1.greeting();
+
+
+
+// 如果您开始创建一系列拥有相似特性的对象时，那么创建一个包含所有共有功能的通用对象，然后在更特殊的对象类型中继承这些特性，将会变得更加方便有用。

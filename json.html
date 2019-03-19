@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Json学习</title>
+</head>
+
+<body>
+  <div id="list"></div>
+  <script>
+    var requestUrl = 'data/productslist.json'; //定义数据源地址
+    var request = new XMLHttpRequest(); //创建一个请求（该请求为一个对象，其中有很多处理的数学和方法，构造者为XMLHttpRequest(）
+    request.open('GET', requestUrl); //定义获取资源的方式，并指定数据源
+    request.responseType = 'json';  //定义返回数据的类型
+    request.send();  //提交请求
+    request.onload = function () {
+      var resources = request.response; //获取请求到的资源，存入一个变量
+      dataPorcess(resources); //定义函数对变量进行处理(主要任务就是创建html来显示数据)
+    }
+    function dataPorcess(resources) {
+      var allPro = resources.products;
+      var ul = document.createElement('ul');
+
+      for (var i = 0; i < allPro.length; i++) {
+        var li = document.createElement('li');
+
+        var img = document.createElement('img');
+        img.setAttribute('title', allPro[i].title);
+        img.setAttribute('alt', allPro[i].title);
+        img.setAttribute('src', allPro[i].src);
+        li.appendChild(img);
+
+        var h3 = document.createElement('h3');
+        h3.textContent = allPro[i].title;
+        li.appendChild(h3);
+
+        var p = document.createElement('p');
+        p.textContent = allPro[i].info;
+        li.appendChild(p);
+
+        ul.appendChild(li);
+      }
+
+      var div=document.querySelector("#list");
+      div.appendChild(ul);
+
+    }
+  </script>
+</body>
+
+</html>
