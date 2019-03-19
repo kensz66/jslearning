@@ -286,7 +286,7 @@ function Person(name, age, gender){
   this.name = name;
   this.age = age;
   this.gender = gender;
-};
+}
 Person.prototype.greeting = function () {
   alert(this.name);
 };
@@ -296,7 +296,7 @@ function Teacher(name, age, gender, subject) {
   Person.call(this, name,age,gender);
 //或者 Person.apply(this,[name,age,gender])
   this.subject = subject;
-};
+}
 Teacher.prototype = Object.create(Person.prototype); //通过Object.create()继承原型对象.到这一步为止,现在Teacher()的prototype的constructor属性指向的是Person(),这不正常,所以要增加下面一句.
 Teacher.prototype.constructor = Teacher; //改变构造函数的指向(让构造函数执行Teacher,而不是Person.如果不改变指向,调用原型中的方法结果不变,但是是通过调用Person的原型对象中的方法执行的,而不是Teacher自身的)
 //Teacher 构造函数创建完毕
