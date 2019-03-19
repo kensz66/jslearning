@@ -12,6 +12,7 @@ x = multiply(4, 5);
 setAttribute('src', 'http://www.v-in.net');
 getAttribute('class', 'classname');
 
+//本地存储
 localStorage.setItem(variable, 'name');
 localStorage.getItem();
 
