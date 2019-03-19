@@ -9,10 +9,6 @@ name = prompt();
 
 x = multiply(4, 5);
 
-setAttribute('src', 'http://www.v-in.net');
-getAttribute('class', 'classname');
-
-//本地存储
 localStorage.setItem(variable, 'name');
 localStorage.getItem();
 
@@ -321,3 +317,46 @@ document.createTextNode("createTextNode"); //定义成文本节点需用appendCh
 // 多个元素的集合可以采用数组的访问方式，也可以采用item(i)方法来访问：
 div=document.querySelectorAll('div');
 // 可以用div[i]来访问或者用 div.item(i)来访问。
+
+
+
+/* ==================================================
+
+  web浏览器 操作DOM
+
+  =================================================== */
+
+
+// window对象
+  //操作载入窗口的文档，存储客户端上文档的特殊数据（例如使用本地数据库或其他存储设备），为当前窗口绑定event handler，等等
+  var width=window.innerWidth;
+  var height = window.innerHeight;
+  //Navigator 对象
+  //可以用这个对象获取一些信息，比如来自用户摄像头的地理信息、用户偏爱的语言、多媒体流等等
+  //document 对象 是载入窗口的实际页面
+
+
+// DOM的增删改查
+// 1.查: document.querySelector()\queryselectorAll()\
+// 2.增: document.createElement('p'); => node.textContent='文本' 或者 creatTextNode('文本');=>node.appendChild();
+// 3.删和移动:
+// 删除节点:Node.removeChild()或者将节点移动到另外一个节点(用 appendChild('要移动的引用元素').)
+// 如果要复制节点, 用Node.cloneNode()方法.
+// 删除自身节点: selfNode.parentNode.removeChild('selNode');
+
+//操作样式
+/*
+添加元素内部样式
+eldment.style.color = 'white';
+para.style.backgroundColor = 'black';
+para.style.padding = '10px';
+para.style.width = '250px';
+para.style.textAlign = 'center';
+*/
+// 添加class
+// element.setAttribute('class', 'classname');
+// 删除属性:element.removeAttribute(),返回underfined,所以不能用链式方法.
+/* setAttribute('src', 'http://www.v-in.net');
+getAttribute('attrName');
+removeAttribute('attrName'); */
+

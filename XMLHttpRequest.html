@@ -18,9 +18,9 @@
     request.send();  //提交请求
     request.onload = function () {
       var resources = request.response; //获取请求到的资源，存入一个变量
-      dataPorcess(resources); //定义函数对变量进行处理(主要任务就是创建html来显示数据)
+      dataProcess(resources); //定义函数对变量进行处理(主要任务就是创建html来显示数据)
     }
-    function dataPorcess(resources) {
+    function dataProcess(resources) {
       var allPro = resources.products;
       var ul = document.createElement('ul');
 

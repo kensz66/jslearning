@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>fetch API</title>
+</head>
+
+<body>
+  <div>
+  </div>
+  <script>
+    var url = '/data/productslist.json';
+    var res = fetch(url);  //res为一个只能用then方法取值传递的Promise, Promise向前传递,状态会不断改变...最后显示成为结果.
+    console.log(res);
+    var a=res
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (response) {
+      var productsArr = response.products;
+      var ul = document.createElement('ul');
+
+      for (var i = 0; i < productsArr.length; i++) {
+        var li = document.createElement('li');
+        var img = document.createElement('img');
+        img.setAttribute('title', productsArr[i].title);
+        img.setAttribute('alt', productsArr[i].title);
+        img.setAttribute('src', productsArr[i].src);
+        li.appendChild(img);
+        var h3 = document.createElement('h3');
+        h3.textContent = productsArr[i].title;
+        li.appendChild(h3);
+        var p = document.createElement('p');
+        p.textContent = productsArr[i].info;
+        li.appendChild(p);
+        ul.appendChild(li);
+      }
+      var div = document.querySelector("div");
+      div.appendChild(ul);
+    });
+
+
+  </script>
+</body>
+
+</html>
