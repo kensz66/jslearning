@@ -311,3 +311,13 @@ teacher1.greeting();
 
 
 // 如果您开始创建一系列拥有相似特性的对象时，那么创建一个包含所有共有功能的通用对象，然后在更特殊的对象类型中继承这些特性，将会变得更加方便有用。
+
+
+
+//==========  DOM学习  =====================
+document.querySelector('div>p').textContent="abc";
+document.createTextNode("createTextNode"); //定义成文本节点需用appendChild()添加到元素上。
+
+// 多个元素的集合可以采用数组的访问方式，也可以采用item(i)方法来访问：
+div=document.querySelectorAll('div');
+// 可以用div[i]来访问或者用 div.item(i)来访问。
