@@ -32,7 +32,7 @@ git checkout 分支名
 git branch -d 分支名
 
 删除远程分支
-git push origin --de 分支名
+git push origin -d 分支名
 
 查看所有分支情况
 git branch -a
