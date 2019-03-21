@@ -521,9 +521,8 @@ parseInt("hello", 10); // NaN
 //控制结构
 // for in
 // for of
-function abc() {
-  forEach();
-}
+obj.forEach();
+
 
 // 注意， Array.length 并不总是等于数组中元素的个数， 如下所示：
 var a = ["dog", "cat", "hen"];
