@@ -515,3 +515,20 @@ function add() {
 add(2, 3, 4, 5, 6); //20;
 
 // 关于call和apply和this,参考:https://www.cnblogs.com/hjson/archive/2019/01/11/10254555.html
+
+//===var let const 隐式地全局变量=====
+// var 作用域为上下文和子块内;
+// let和const 作用域为
+var a = 5;
+var b = 10;
+
+if (a === 5) {
+  let a = 4; // The scope is inside the if-block
+  var b = 1; // The scope is inside the function
+
+  console.log(a); // 4
+  console.log(b); // 1
+}
+
+console.log(a); // 5
+console.log(b); // 1
