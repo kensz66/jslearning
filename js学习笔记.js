@@ -500,3 +500,18 @@ var a = ["dog", "cat", "hen"];
 a[100] = "fox";
 console.log(a.length); // 101
 // 记住： 数组的长度是比数组最大索引值多一的数。
+
+
+
+// ===============arguments对象==========
+// 每个函数都有一个arguments的内部对象,这个对象类似数组(但是不是数组,只有length属性和索引值),包括了所有的参数.列如:
+function add() {
+  var sum = 0;
+  for (var i = 0; i < arguments.length; i++) {
+    sum += arguments[i];
+  }
+  return sum;
+}
+add(2, 3, 4, 5, 6); //20;
+
+// 关于call和apply和this,参考:https://www.cnblogs.com/hjson/archive/2019/01/11/10254555.html
