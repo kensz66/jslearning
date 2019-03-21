@@ -178,6 +178,82 @@ console.log(myFish);
 console.log(popped);
 // surgeon */
 
+//.slice()：从一个数组中提取相连的一串值作为新数组输出，不改变原数组
+[1,2,3,4,5,6].slice(2,5); // [3,4,5]
+
+//.splice :修改数组
+从第 2 位开始删除 0 个元素，插入“drum”
+节
+
+var myFish = ["angel", "clown", "mandarin", "surgeon"];
+var removed = myFish.splice(2, 0, "drum");
+
+// 运算后的 myFish: ["angel", "clown", "drum", "mandarin", "surgeon"]
+// 被删除的元素: [], 没有元素被删除
+
+从第 2 位开始删除 0 个元素，插入“drum” 和 "guitar"
+节
+
+var myFish = ['angel', 'clown', 'mandarin', 'sturgeon'];
+var removed = myFish.splice(2, 0, 'drum', 'guitar');
+
+// 运算后的 myFish: ["angel", "clown", "drum", "guitar", "mandarin", "sturgeon"]
+// 被删除的元素: [], 没有元素被删除
+
+从第 3 位开始删除 1 个元素
+节
+
+var myFish = ['angel', 'clown', 'drum', 'mandarin', 'sturgeon'];
+var removed = myFish.splice(3, 1);
+
+// 运算后的 myFish: ["angel", "clown", "drum", "sturgeon"]
+// 被删除的元素: ["mandarin"]
+
+从第 2 位开始删除 1 个元素，插入“trumpet”
+节
+
+var myFish = ['angel', 'clown', 'drum', 'sturgeon'];
+var removed = myFish.splice(2, 1, "trumpet");
+
+// 运算后的 myFish: ["angel", "clown", "trumpet", "surgeon"]
+// 被删除的元素: ["drum"]
+
+从第 0 位开始删除 2 个元素，插入"parrot"、"anemone"和"blue"
+节
+
+var myFish = ['angel', 'clown', 'trumpet', 'sturgeon'];
+var removed = myFish.splice(0, 2, 'parrot', 'anemone', 'blue');
+
+// 运算后的 myFish: ["parrot", "anemone", "blue", "trumpet", "sturgeon"]
+// 被删除的元素: ["angel", "clown"]
+
+从第 2 位开始删除 2 个元素
+节
+
+var myFish = ['parrot', 'anemone', 'blue', 'trumpet', 'sturgeon'];
+var removed = myFish.splice(myFish.length - 3, 2);
+
+// 运算后的 myFish: ["parrot", "anemone", "sturgeon"]
+// 被删除的元素: ["blue", "trumpet"]
+
+从倒数第 2 位开始删除 1 个元素
+节
+
+var myFish = ['angel', 'clown', 'mandarin', 'sturgeon'];
+var removed = myFish.splice(-2, 1);
+
+// 运算后的 myFish: ["angel", "clown", "sturgeon"]
+// 被删除的元素: ["mandarin"]
+
+从第 2 位开始删除所有元素
+节
+
+var myFish = ['angel', 'clown', 'mandarin', 'sturgeon'];
+var removed = myFish.splice(2);
+
+// 运算后的 myFish: ["angel", "clown"]
+// 被删除的元素: ["mandarin", "sturgeon"]
+
 
 //====================== 对象  ============================
 /* 对象成员其实包括2个内容: 一个是这个成员的名称(或者说是代表这个成员的变量, 其实这个值也是用变量的形式存在内存中的.又可以被称为对象的一个属性, 又或者可以说是关联了一个值的索引), 其次是这个成员的值.
