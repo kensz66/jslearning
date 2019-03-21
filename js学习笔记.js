@@ -182,8 +182,7 @@ console.log(popped);
 [1,2,3,4,5,6].slice(2,5); // [3,4,5]
 
 //.splice :修改数组
-从第 2 位开始删除 0 个元素，插入“drum”
-节
+// 从第 2 位开始删除 0 个元素，插入“drum”节
 
 var myFish = ["angel", "clown", "mandarin", "surgeon"];
 var removed = myFish.splice(2, 0, "drum");
@@ -191,8 +190,7 @@ var removed = myFish.splice(2, 0, "drum");
 // 运算后的 myFish: ["angel", "clown", "drum", "mandarin", "surgeon"]
 // 被删除的元素: [], 没有元素被删除
 
-从第 2 位开始删除 0 个元素，插入“drum” 和 "guitar"
-节
+// 从第 2 位开始删除 0 个元素，插入“drum” 和 "guitar"节
 
 var myFish = ['angel', 'clown', 'mandarin', 'sturgeon'];
 var removed = myFish.splice(2, 0, 'drum', 'guitar');
@@ -200,8 +198,7 @@ var removed = myFish.splice(2, 0, 'drum', 'guitar');
 // 运算后的 myFish: ["angel", "clown", "drum", "guitar", "mandarin", "sturgeon"]
 // 被删除的元素: [], 没有元素被删除
 
-从第 3 位开始删除 1 个元素
-节
+// 从第 3 位开始删除 1 个元素节
 
 var myFish = ['angel', 'clown', 'drum', 'mandarin', 'sturgeon'];
 var removed = myFish.splice(3, 1);
@@ -209,8 +206,7 @@ var removed = myFish.splice(3, 1);
 // 运算后的 myFish: ["angel", "clown", "drum", "sturgeon"]
 // 被删除的元素: ["mandarin"]
 
-从第 2 位开始删除 1 个元素，插入“trumpet”
-节
+// 从第 2 位开始删除 1 个元素，插入“trumpet”节
 
 var myFish = ['angel', 'clown', 'drum', 'sturgeon'];
 var removed = myFish.splice(2, 1, "trumpet");
@@ -218,8 +214,7 @@ var removed = myFish.splice(2, 1, "trumpet");
 // 运算后的 myFish: ["angel", "clown", "trumpet", "surgeon"]
 // 被删除的元素: ["drum"]
 
-从第 0 位开始删除 2 个元素，插入"parrot"、"anemone"和"blue"
-节
+// 从第 0 位开始删除 2 个元素，插入"parrot"、"anemone"和"blue"节
 
 var myFish = ['angel', 'clown', 'trumpet', 'sturgeon'];
 var removed = myFish.splice(0, 2, 'parrot', 'anemone', 'blue');
@@ -227,8 +222,7 @@ var removed = myFish.splice(0, 2, 'parrot', 'anemone', 'blue');
 // 运算后的 myFish: ["parrot", "anemone", "blue", "trumpet", "sturgeon"]
 // 被删除的元素: ["angel", "clown"]
 
-从第 2 位开始删除 2 个元素
-节
+// 从第 2 位开始删除 2 个元素节
 
 var myFish = ['parrot', 'anemone', 'blue', 'trumpet', 'sturgeon'];
 var removed = myFish.splice(myFish.length - 3, 2);
@@ -236,8 +230,7 @@ var removed = myFish.splice(myFish.length - 3, 2);
 // 运算后的 myFish: ["parrot", "anemone", "sturgeon"]
 // 被删除的元素: ["blue", "trumpet"]
 
-从倒数第 2 位开始删除 1 个元素
-节
+// 从倒数第 2 位开始删除 1 个元素节
 
 var myFish = ['angel', 'clown', 'mandarin', 'sturgeon'];
 var removed = myFish.splice(-2, 1);
@@ -245,8 +238,7 @@ var removed = myFish.splice(-2, 1);
 // 运算后的 myFish: ["angel", "clown", "sturgeon"]
 // 被删除的元素: ["mandarin"]
 
-从第 2 位开始删除所有元素
-节
+// 从第 2 位开始删除所有元素节
 
 var myFish = ['angel', 'clown', 'mandarin', 'sturgeon'];
 var removed = myFish.splice(2);
