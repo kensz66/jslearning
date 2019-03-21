@@ -248,6 +248,17 @@ console.log(person4);
 var person5 = new person1.constructor('ken', '22', 'man');
 console.log(person5);
 
+// 延伸理解
+// 变量定义的方法:将变量保存在对象中
+// 通常情况下总是倾向于用var定义全局变量, 造成全局变量污染.其实, 可以通过对象的方式, 定义多个变量, 而不会对全局变量造成污染, 例如:
+var nodes = {
+  a: document.querySelector('a'),
+  div: document.querySelector('div'),
+  button: document.getElementsByTagName('button')
+}
+// 通过一下方式,就可以通过nodes.a,nodes.div,nodes.btn当成变量来使用.
+
+
 //对函数的理解:每个函数都是对象,包含以下:length:0,name:函数名,caller以及arguments等属性.还有一个特殊属性prototype,这个特殊的成员其实是一个构造函数,里面包括许多的属性和方法.这些属性和方法可以供本函数对象使用.
 
 /* 注意: 一种常见的对象定义模式是, 在构造体(函数体)中定义属性, 在prototype属性上定义方法.如此构造器只包含属性定义, 而方法则分装在不同的代码块中, 代码更具可读性.例如: */
@@ -350,3 +361,86 @@ para.style.textAlign = 'center';
 getAttribute('attrName');
 removeAttribute('attrName'); */
 
+///=================  闭包 =================================
+// 概念:闭包,就是指当一个内部函数被其外部函数之外的变量引用时,就形成了一个闭包,例如以下为最简单的闭包:
+function a(x) {
+  var b = function (y) { return x + y; }; //b为内部函数,a为b的外部函数
+  return b;  //返回这个内部函数
+}
+c = a(5);  //执行a函数
+//执行函数a, 返回一个函数b.正常情况下,返回的都是一个值,但是这里返回是一个函数,这个函数依赖函数a执行才能产生.
+// a(5)执行时,会生产一个变量x,x指针指向值5.
+// 通常情况下函数执行完毕后, x变量会被垃圾处理机制回收.但是, 这里因为执行a函数后, 会生产一个新的函数, 而新的函数还会用到x变量的值.所以这个x没有被回收(指针已然指向5),而是继续存在.这样就形成了一个变量x常在的情况.
+//x变量因为只能通过返回的函数b引用,所以x具有了私有性.其他的方式都无法引用x变量.
+// 一般为了完整性, 可以这样写:
+function a(x) {
+  var b = function (y) { return x + y; }
+  window.c = b; //外部c变量引用了内部函数b,就形成一个闭包
+}
+
+
+// 闭包的高级写法 :
+// 参考: https://zhuanlan.zhihu.com/p/27857268/
+//参考: http://www.xurry.top/2017/09/06/javascript-closure/
+(function (document) {
+  var viewport;
+  var obj = {
+    init: function (id) {
+      viewport = document.querySelector("#" + id);
+    },
+    addChild: function (child) {
+      viewport.appendChild(child);
+    },
+    removeChild: function (child) {
+      viewport.removeChild(child);
+    }
+  }
+  window.jView = obj;
+})(document);
+
+/*
+ ========================重新介绍JavaScript============================
+
+ */
+//JavaScript 按照如下规则将变量转换成布尔类型：
+// 1.false、 0、 空字符串("")、 NaN、 null 和 undefined 被转换为 false
+Boolean('NaN');  //true
+Boolean(NaN);  //false
+Boolean(null); //false
+isNaN(NaN); // true
+// ...
+// 2.所有其他值被转换为 true
+
+
+// 内置函数 parseInt() 将字符串转换为整型
+parseInt("123", 10); // 123
+parseInt("010", 10); //10
+parseInt("010"); //  8
+parseInt("0x10"); // 16
+parseInt("11", 2); // 3
+parseInt("hello", 10); // NaN
+
+//字符串 操作
+"hello".length; // 5
+"hello".charAt(0); // "h"
+"hello, world".replace("hello", "goodbye"); // "goodbye, world"
+"hello".toUpperCase(); // "HELLO"
+
+//变量
+// let和const为块级变量声明关键字, 只在块级内可见
+// const 声明为一个常量, 不能在赋值改变值.
+// const Pi = 3.14; // 设置 Pi 的值
+// Pi = 1; // 将会抛出一个错误因为你改变了一个常量的值。
+
+//控制结构
+// for in
+// for of
+function abc() {
+  forEach();
+}
+
+// 注意， Array.length 并不总是等于数组中元素的个数， 如下所示：
+var a = ["dog", "cat", "hen"];
+a[100] = "fox";
+a.length; // 101
+// 记住： 数组的长度是比数组最大索引值多一的数。
