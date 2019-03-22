@@ -532,3 +532,100 @@ if (a === 5) {
 
 console.log(a); // 5
 console.log(b); // 1
+
+
+// ====== 事件 ========
+// 事件流:
+// 事件冒泡: 事件由开始最具体的元素接收(文档中嵌套层次最深的那个节点),然后逐级向上传播到最不具体的那个节点(文档)
+// 事件捕获: 不太具体的节点最开始接收到事件,最具体的元素最后接收到事件.(与事件冒泡相反)
+
+// 事件处理程序
+
+// 1.html事件处理程序;
+// 事件直接加载html中, 如
+/* <input  type='button' value ='按钮' onclick = 'showMessage('hello')'> */
+
+// 2.DOM0级事件处理程序: 把一个函数直接赋值给一个处理程序属性.
+/* <input type ='button' value ='按钮' id='btn'>
+  var btn=document.querySelctor('btn');
+  btn.onclick = functon(){
+   ...
+  }
+  删除
+  btn.onclick = null;
+*/
+//3.DOM2级事件处理程序(定义了2个方法)
+// addEventListener() 和removeEventListener()
+// btn.addEventListener('click', function, false(表示冒泡));
+// btn.removeEventListener('click', function,false); //删除监听
+
+// 4. IE8&lt 事件处理程序 attachEvent() dettachEvent() 只有2个参数,因为IE8默认事件冒泡
+// btn.attachEvent('oclick', showMes);
+// btn.dettachEvent('oclick', showMes);//删除监听
+
+// 5.跨浏览器事件处理程序
+var eventUtil = {
+    //添加句柄
+    addHandler: function (event, type, handler) {
+      if (event.addEventListener) {
+        event.addEventListener(type, handler, false);
+      } else if (event.attachEvent) {
+        event.attachEvent('on' + type, handler)
+      } else {
+        event. ['on' + type] = handler;
+      }
+    },
+    // 删除事件句柄
+    removeHandler: function (event, type, handler) {
+      if (event.removeEventListener) {
+        event.removeEventListener(type, handler, false);
+      } else if (event.detachEvent) {
+        event.detachEvent('on' + type, handler)
+      } else {
+        event. ['on' + type] = null;
+      }
+    },
+    //获取事件
+    getEvent: function (event) {
+      return event ? event : window.event; //IE8和IE以下浏览器事件对象引用为window.event
+    },
+    //获取事件类型
+    getType: function (event) {
+      return event.type;
+    },
+    //获取事件目标对象
+    getElement: function (event) {
+      return event.target || event.scrElevent;
+    },
+    //阻止事件默认行为
+    preventDefault: function (event) {
+      if (event.preventDefault) {
+        event.preventDefault();
+      } else {
+        event.returnValue = false;
+      }
+    },
+    //阻止事件冒泡行为
+    stopPropagation: function (event) {
+      if (event.stopPropagation) {
+        event.stopPropagation();
+      } else {
+        event.cancelBubble = true;
+      }
+    }
+}
+eventUtil.addHandler(btn, 'click', showMes);
+eventUtil.removeHandler(btn, 'click', showMes);
+
+// DOM 事件对象
+/*
+1.属性 type target
+2.方法 ele.stopPropagation() ele.preventDefault() //在调用函数中写入代码
+ */
+//IE8 &lt IE8 事件对象
+/*
+1.属性 type
+2.属性 srcElement 获取事件目标
+3.属性  cancelBubble = true 阻止冒泡
+4.属性 returnValue=false 用于设置阻止事件默认行为
+ */
