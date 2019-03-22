@@ -629,3 +629,13 @@ eventUtil.removeHandler(btn, 'click', showMes);
 3.属性  cancelBubble = true 阻止冒泡
 4.属性 returnValue=false 用于设置阻止事件默认行为
  */
+
+
+///逗号操作符  对它的每个操作数求值（从左到右），并返回最后一个操作数的值。
+var x = 1;
+x = (x++, x);
+console.log(x);
+// expected output: 2
+x = (2, 3);
+console.log(x);
+// expected output: 3
