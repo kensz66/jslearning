@@ -572,7 +572,7 @@ var eventUtil = {
       } else if (event.attachEvent) {
         event.attachEvent('on' + type, handler)
       } else {
-        event. ['on' + type] = handler;
+        event['on' + type] = handler;
       }
     },
     // 删除事件句柄
@@ -582,7 +582,7 @@ var eventUtil = {
       } else if (event.detachEvent) {
         event.detachEvent('on' + type, handler)
       } else {
-        event. ['on' + type] = null;
+        event['on' + type] = null;
       }
     },
     //获取事件
