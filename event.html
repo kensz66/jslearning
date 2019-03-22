@@ -25,7 +25,9 @@
       top: 50%;
       margin-left: -150px;
       margin-top: -75px;
-      display: none;
+      /* display: none; */
+      opacity: 0; 
+      transition: all 5s;
     }
 
     #login_box p {
@@ -59,6 +61,7 @@
       function showLogin() {
         // 执行代码
         login_box.style.display = "block";
+        login_box.style.opacity = "1";
 
       }
       // 隐藏登录层函数
