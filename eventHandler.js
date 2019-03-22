@@ -4,9 +4,9 @@ var evUtil = {
     if (event.addEventListener) {
       event.addEventListener(type, handler, false);
     } else if (event.attachEvent) {
-      event.attachEvent('on' + type, handler)
+      event.attachEvent('on' + type, handler);
     } else {
-      event['on'+type] = handler;
+      event['on' + type] = handler;
     }
   },
   // 删除事件句柄
@@ -14,7 +14,7 @@ var evUtil = {
     if (event.removeEventListener) {
       event.removeEventListener(type, handler, false);
     } else if (event.detachEvent) {
-      event.detachEvent('on' + type, handler)
+      event.detachEvent('on' + type, handler);
     } else {
       event['on' + type] = null;
     }
@@ -47,4 +47,4 @@ var evUtil = {
       event.cancelBubble = true;
     }
   }
-}
+};
