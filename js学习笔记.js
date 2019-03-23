@@ -124,10 +124,6 @@ console.log(b);
 var a = 'abcde';
 var b = a.length; // 返回 b=5
 var i = a[2]; //返回 i='c',通过此方法可以检索特定字符串
-// idexof用于在字符串中查找子字符串, 如果找不到, 则返回值 -1;
-if (browserType.indexOf('xyz') !== -1) {
-  // do stuff with the string
-}
 a.slice(0, 3); //返回 'abc'
 a.slice(2, 4); //返回 'cd'
 //这里第一参数为索引号,第二个参数为第几个位置.所以得到的字符串的长度就是 第二个参数减去第一参数
@@ -135,6 +131,10 @@ a.slice(2, 4); //返回 'cd'
 
 // 此外， 如果您知道要在某个字符之后提取字符串中的所有剩余字符， 则不必包含第二个参数， 而只需要包含要从中提取的字符位置 字符串中的其余字符。 尝试以下：
 var browserType = 'mozalla';
+// idexof用于在字符串中查找子字符串, 如果找不到, 则返回值 -1;
+if (browserType.indexOf('xyz') !== -1) {
+  // do stuff with the string
+}
 browserType.slice(2); //返回 'zalla'
 // 这返回“ zilla” - 这是因为2的字符位置是字母z， 并且因为没有包含第二个参数， 所以返回的子字符串是字符串中的所有剩余字符。
 
@@ -515,6 +515,8 @@ function add() {
 add(2, 3, 4, 5, 6); //20;
 
 // 关于call和apply和this,参考:https://www.cnblogs.com/hjson/archive/2019/01/11/10254555.html
+// call(), apply()在特定作用域调用函数
+// bind（）会创建一个函数的实例， this会被绑定到bind() 函数:bind() 绑定this， bind()() 调用函数
 
 //===var let const 隐式地全局变量=====
 // var 作用域为上下文和子块内;

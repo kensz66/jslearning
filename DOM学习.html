@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>DOM学习</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: 1px solid #efefef;
+  }
+
+  .container {
+    margin: 5rem 10rem;
+  }
+</style>
+
+<body>
+  <div class="container">
+    <div id="someNode" class="abc">
+      <ul>
+        这是someNode的子节点
+        <li>这是someNode的孙节点</li>
+      </ul>
+    </div>
+  </div>
+  <script>
+    //DOM中所有节点属性和方法都继承Node类型,因此所有的节点类型都有共享的基本属性和方法.
+    //nodeType(节点类型)
+    var someNode = document.querySelector('#someNode');
+    if (someNode.nodeType == 1) { //元素节点类型为1
+      value = someNode.nodeName;
+      console.log(value);
+      console.log(someNode.childNodes);
+    }
+
+    //节点关系
+    // 每个节点都有一个childNodes 属性，其中保存着一个NodeList对象
+    var firstChild = someNode.childNodes[1]; //获取第一个子节点
+    var secondChild = someNode.childNodes.item(1); //同上,两种方法都可以用,不是get()(这是jQuery方法)
+    var thirdchild = someNode.childNodes.length; //获取字节点的数量
+    var arrayOfNodes = Array.prototype.slice.call(someNode.childNodes, 0); //将ChildList转换为数组(ie8不支持);
+    //通用转换成数组的函数:
+    function convertToArray(nodes) {
+      var arr = [];
+      try {
+        arr = Array.prototype.slice.call(nodes, 0); //call第一个参数为绑定对象,第二个为传入一个参数,也可传入多个参数.
+      } catch (ex) {
+        arr = new Array();
+        for (var i = 0; i < nodes.length; i++) {
+          arr.push(nodes[i]);
+        }
+      }
+      return arr;
+    }
+    console.log(arrayOfNodes);
+
+
+    //==================关于节点相互关系的属性======================
+
+    // parentNode nextSibling previousSibling属性分别指向父节点\下一个同胞节点和前一个同胞节点
+    //firstChild lastChild
+
+    // 操作节点的方法:
+    //hasChildNodes(),判断是否有子节点.
+
+    //appendChild(),插入节点到最后;而可以理解为移动节点到父节点的最后.(插入的节点有可能是新产生的,也有可能是原来的节点.)任何DOM节点也不能同时出现在文档中的多个位置上。因此，如果在调用appendChild()时传入了父节点的第一个子节点，那么该节点就会成为父节点的最后一个子节点.
+    /* var returnedNode = someNode.appendChild(someNode.firstChild);
+    alert(returnedNode == someNode.firstChild); //false
+    alert(returnedNode == someNode.lastChild); //true */
+
+    //insertBefore,接受两个参数：要插入的节点和作为参照的节点。插入节点后，被插入的节点会变成参照节点的前一个同胞节点（previousSibling），同时被方法返回。如果参照节点是null，则insertBefore()与appendChild()执行相同的操作
+    /* returnedNode = someNode.insertBefore(newNode, null);
+    alert(newNode == someNode.lastChild); //true */
+    //插入后成为第一个子节点
+    /* var returnedNode = someNode.insertBefore(newNode, someNode.firstChild);
+    alert(returnedNode == newNode); //true
+    alert(newNode == someNode.firstChild); //true */
+    //插入到最后一个子节点前面
+    /* returnedNode = someNode.insertBefore(newNode, someNode.lastChild);
+    alert(newNode == someNode.childNodes[someNode.childNodes.length - 2]); //true */
+
+    // 注意:被插入的节点如果不是新建的,则只是表示将被插入的节点移动了位置.原来的位置上就空了.
+
+    //replaceChild()和removeChild()  前者为替换,可以替换节点
+    //替换第一个子节点
+    // var returnedNode = someNode.replaceChild(newNode, someNode.firstChild);
+    //替换最后一个子节点
+    // returnedNode = someNode.replaceChild(newNode, someNode.lastChild);
+    //在使用replaceChild()插入一个节点时，该节点的所有关系指针都会从被它替换的节点复制过来。尽管从技术上讲，被替换的节点仍然还在文档中，但它在文档中已经没有了自己的位置。
+    //如果只想移除而非替换节点，可以使用removeChild()方法。这个方法接受一个参数，即要移除的节点。被移除的节点将成为方法的返回值，如下面的例子所示。
+    //移除第一个子节点
+    // var formerFirstChild = someNode.removeChild(someNode.firstChild);
+    //移除最后一个子节点
+    // var formerLastChild = someNode.removeChild(someNode.lastChild);
+
+
+    //cloneNode(node,true/false),true为深度复制,false表示不复制子节点.
+    // cloneNode()方法不会复制添加到DOM 节点中的JavaScript 属性
+
+    // 创建元素节点    document.createElement('元素node名称')
+    // 创建文本节点    document.createTextNode('文本node名称')
+
+
+
+    //DOM查找元素
+    document.getElementById();
+    document.getElementsByTagName();
+    document.getElementsByClassName();
+    document.getElementsByName();
+    document.getElementsByTagNameNS();
+    document.querySelector(); //通过CSS选择符选择第一个匹配的元素
+    document.querySelectorAll(); //通过CSS选择符选择所有陪陪的元素,行车一个NodeList的实例
+    //与querySelector()类似，能够调用querySelectorAll()方法的类型包括Document、DocumentFragment 和Element
+
+    //=================================================================
+
+    //动态加载js脚本(脚本文件)
+    // 动态加载js脚本可以实现异步加载,避免浪费资源.
+    function loadScript(url) {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = url;
+      document.body.appendChild(script);
+    }
+    loadScript('a.js');
+    //动态加载行内脚本
+    function loadScriptString(code) {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      try {
+        script.appendChild(document.createTextNode(code));
+      } catch (ex) {
+        script.text = code;
+      }
+      document.body.appendChild(script);
+    }
+    var code = "function sayHi(){alert('hi');}";
+    loadScriptString(code);
+
+    //动态加载样式css(css文件)
+    function loadCss(url) {
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.src = url;
+      var head = document.getElementsByTagName('head')[0];
+      head.appendChild(link);
+    }
+    loadCss('b.css');
+    //动态加载样式(html嵌入style标签)
+    function loadStyle(css) {
+      var style = document.createElement('style');
+      style.type = 'text/css';
+      try {
+        style.appendChild(document.createTextNode(css)); //css内容可以作为文本节点
+      } catch (ex) {
+        style.styleSheet.cssText = css;
+      }
+      var head = document.getElementsByTagName('head')[0];
+      head.appendChild(style);
+    }
+    loadCss('body {color : red;}');
+
+
+    //=============================================================
+
+    //操作表格 http://www.shouce.ren/api/view/a/15298
+
+    //使用Nodelist
+
+
+    // =====================  Element类型 =============
+
+    // 访问标签名:nodeName与tagName属性返回值一样 div.tagName=dov.nodeName  注意的问题是,div.tagName返回的是DIV(大写),所以比较时,请先转换成统一的小写或大写.
+    // div.tagName.toLowerCase()==div.nodeName.toLowerCase();
+
+    //===================================================
+    // HTML元素类型直接继承自Element,并添加了一些属性:
+    /* id,
+    title,
+    lang,
+    dir  值为 'ltr',或者'rtl';
+    className 不是class,因为class为ECMAScript的保留字. */
+    // 例如:
+    // <div id='mydiv' class='bd' title='body text' lang='en' dir ='ltr'></div>
+    // 通过 node.className node.id  node.title node.lang node.dir取得属性值或赋予新值
+    // 注意 div.getAttribute("class")); 用'class',而不是 'className'
+
+    // 公认的属性可通过node.属性名确的属性值,特殊的自定义的属性名在IE中也可以这么取得属性值.但是在其他主流浏览器中不能.所以,特殊属性一般采用 getAttibute()来获取.
+
+
+    //两类特殊属性:
+    /*
+    node.style返回的是一个对象, node.getAttribute('style'),返回的是一组文本(字符串);
+    node.onclick 返回的是javaScript函数, node.getAttibute('onclick'),返回字符串;
+   */
+    // 所以,一般开发人员的做法是:一般的属性直接用node.属性名,特殊属性用 node.getAttribute();
+
+    div = document.querySelector('div');
+    div.className = 'yellow';
+    div.align = 'center';
+    div.onclick = 'getMove()'; //无效
+    div.setAttribute('onclick', 'getMove()'); //成功
+    div.setAttribute('myColor', 'red'); //成功
+    console.log(div.className);
+    // 通过setAttribute()方法既可以操作HTML 特性也可以操作自定义特性。通过这个方法设置的特性名会被统一转换为小写形式，即"ID"最终会变成"id"。
+
+    //通过元素属性直接访问
+    div = document.querySelector('div');
+    div.className = 'yellow';
+    div.align = 'center';
+    div.onclick = 'getMove()';
+
+    //通过get set remove attribute函数访问
+    div.setAttribute('onclick', 'getMove()');
+    div.setAttribute('myColor', 'red');
+    console.log(div.className);
+
+    // 通过属性节点的角度获取\设置\删除\添加属性
+
+    var classValue = div.attributes.getNamedItem('class').nodeValue; //获取div的class属性值
+    //等价于 var clasValue=div.attributes['class'].nodeValue;
+
+    div.attributes['align'].nodeValue = 'someOtherId'; //更改'align'为'someOther';
+
+    // 添加元素属性节点的另外一个方法(当成文档的属性节点,因此也有一套方法):
+    var attr = document.createAttribute("align"); //创建属性节点
+    attr.value = "left"; //对属性节点赋值
+    element.setAttributeNode(attr); //给元素添加属性节点
+    /* alert(element.attributes["align"].value); //"left"
+    alert(element.getAttributeNode("align").value); //"left"
+    alert(element.getAttribute("align")); //"left" */
+
+    //node.attributes是一个节点属性的集合,类似于数组,但不是数组,因为它是动态更新的.
+    // if(client.browser.ie && client.browser.ie <= 7){} 用于判断浏览器版本
+
+    //==============================================================================
+    //元素的子节点
+    // 注意:IE计算的子节点为元素节点的个数,而其他浏览器会把空白的文本节点数也计入,所以其他浏览器的子节点数为2倍的IE节点数+1.对于这个问题,如果要取得元素的子元素节点,就必须做一个判断,例如:
+    for (var i = 0, len = element.childNodes.length; i < len; i++) {
+      if (element.childNodes[i].nodeType == 1) { //元素的nodeType 为1
+        //对每个节点执行某些操作
+      }
+    }
+    // 或者通过getElementByTagName()或者querrySelectorAll()来获取
+
+    //==============================================================
+    //操作文本节点 文本节点的nodeType = 3 ;
+    /* appendData(text)： 将text 添加到节点的末尾。
+    deleteData(offset, count)： 从offset 指定的位置开始删除count 个字符。
+    insertData(offset, text)： 在offset 指定的位置插入text。
+    replaceData(offset, count, text)： 用text 替换从offset 指定的位置开始到offset + count 为止处的文本。
+    splitText(offset)： 从offset 指定的位置将当前文本节点分成两个文本节点。
+    substringData(offset, count)： 提取从offset 指定的位置开始到offset + count 为止处的字符串。 */
+
+    //=================================================================
+    //利用 DocumentFragment 文档片段类型一次性添加多个节点,避免单个添加造成浏览器反复渲染,例如:
+    var fragment = document.createDocumentFragment();
+    var ul = document.getElementById("myList");
+    var li = null;
+    for (var i = 0; i < 3; i++) {
+      li = document.createElement("li");
+      li.appendChild(document.createTextNode("Item " + (i + 1)));
+      fragment.appendChild(li);
+    }
+    ul.appendChild(fragment);
+
+
+    //=====================================
+    // matchesSelector('css选择符')方法 判断调用的元素是与该选择符匹配,返回一个布尔值.
+    // IE9+通过msMatchesSelector()支持该方法,其他浏览器的低版本也需加厂商前缀.因此,如果要用这个方法,最好编写一个包装函数,如下:
+    function matchesSelector(element, selector) {
+      if (element.matchesSelector) {
+        return element.matchesSelector(selector);
+      } else if (element.msMatchesSelector) {
+        return element.msMatchesSelector(selector);
+      } else if (element.mozMatchesSelector) {
+        return element.mozMatchesSelector(selector);
+      } else if (element.webkitMatchesSelector) {
+        return element.webkitMatchesSelector(selector);
+      } else {
+        throw new Error("Not supported.");
+      }
+    }
+    if (matchesSelector(document.body, "body.page1")) {
+      //执行操作
+    }
+
+  </script>
+
+</body>
+
+</html>
