@@ -5,13 +5,67 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>test</title>
+  <title>数据属性的修改</title>
 </head>
 
 <body>
-  <div id="div">学习</div>
   <script>
-    var div = document.querySelector('#div');
+    //特性(attribute)与属性(property)
+    //特性是对象的'以前讲的属性',比如obj.name或者obj[name]中name就是特性,而他们的值就是属性(property).
+    // 数据属性的修改就是对property的属性进行修改,property的属性包括:
+    // 1.configurable: 是否可以删除;
+    // 2.writable:是否可以修改;
+    // 3.enumerable: 是否可以迭代(如用for-in循环返回属性)
+    // 4.value: 就是只特性的值
+    // 默认都是true,但是如果调用了Object.defineProperty,默认就都是false了. 所以,只要根据需要改部分为true就可以了.
+    var person = {};
+    Object.defineProperty(person, 'name', { //三个参数:对象/特性(属性的名字)/描述符对象
+      writable: false, //设置为值不可修改
+      configurable: true,
+      value: 'ken'
+    })
+    // 这个函数通过设置参数就把函数设置完了(设置就是参数).
+    //如果通过Object.defineProperty设置了数据属性,那么数据属性的默认值都为false
+    alert(person.name); //ken
+    person.name = 'kensz66';
+    alert(person.name); // ken
+    delete person.name;
+    alert('删除成功 ' + person.name);
+
+    //访问器属性,就是特性(attribute)的属性,特性的属性没有value值.特性说到底就是一个访问器,用于访问属性(property)中数据.
+    /* 1.configurable:控制是否可通过delete删除而重新定义,能否修改属性的特性.
+    2.enumerable;
+    3.get
+    4.set */
+    var book = {}
+    Object.defineProperties(book, {
+      //设置数据属性
+      _year: {  //_下划线表示这个属性只能通过函数方法修改,不可以通过特性修改.
+        value: 2004
+      },
+      edition: {
+        writable: true,
+        value: 1
+      },
+      //定义访问器属性
+      year: {
+        get: function () {
+          return this._year;
+        },
+        set: function (newValue) {
+          if (newValue > 2004) {
+            this._year = newValue;
+            this.edition += newValue - 2004;
+          }
+        }
+      }
+
+    })
+    console.log(book);
+    book.year = 2006;
+    console.log(book.edition);
+    console.log(book.year);
+    alert(typeof null); //返回object null被认为是一个空的对象,因为设置为空对象更为合理.比如将一个对象赋值为空时,这个null就是一个对象,只是什么都没有.
   </script>
 </body>
 

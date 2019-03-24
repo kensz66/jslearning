@@ -179,7 +179,7 @@ console.log(popped);
 // surgeon */
 
 //.slice()：从一个数组中提取相连的一串值作为新数组输出，不改变原数组
-[1,2,3,4,5,6].slice(2,5); // [3,4,5]
+[1, 2, 3, 4, 5, 6].slice(2, 5); // [3,4,5]
 
 //.splice :修改数组
 
@@ -340,7 +340,7 @@ Test.prototype.y = function () {
 */
 
 //============构造函数的继承================
-function Person(name, age, gender){
+function Person(name, age, gender) {
   this.name = name;
   this.age = age;
   this.gender = gender;
@@ -351,8 +351,8 @@ Person.prototype.greeting = function () {
 //Person构造函数创建完毕;
 
 function Teacher(name, age, gender, subject) {
-  Person.call(this, name,age,gender);
-//或者 Person.apply(this,[name,age,gender])
+  Person.call(this, name, age, gender);
+  //或者 Person.apply(this,[name,age,gender])
   this.subject = subject;
 }
 Teacher.prototype = Object.create(Person.prototype); //通过Object.create()继承原型对象.到这一步为止,现在Teacher()的prototype的constructor属性指向的是Person(),这不正常,所以要增加下面一句.
@@ -369,11 +369,11 @@ teacher1.greeting();
 
 
 //==========  DOM学习  =====================
-document.querySelector('div>p').textContent="abc";
+document.querySelector('div>p').textContent = "abc";
 document.createTextNode("createTextNode"); //定义成文本节点需用appendChild()添加到元素上。
 
 // 多个元素的集合可以采用数组的访问方式，也可以采用item(i)方法来访问：
-div=document.querySelectorAll('div');
+div = document.querySelectorAll('div');
 // 可以用div[i]来访问或者用 div.item(i)来访问。
 
 
@@ -386,12 +386,12 @@ div=document.querySelectorAll('div');
 
 
 // window对象
-  //操作载入窗口的文档，存储客户端上文档的特殊数据（例如使用本地数据库或其他存储设备），为当前窗口绑定event handler，等等
-  var width=window.innerWidth;
-  var height = window.innerHeight;
-  //Navigator 对象
-  //可以用这个对象获取一些信息，比如来自用户摄像头的地理信息、用户偏爱的语言、多媒体流等等
-  //document 对象 是载入窗口的实际页面
+//操作载入窗口的文档，存储客户端上文档的特殊数据（例如使用本地数据库或其他存储设备），为当前窗口绑定event handler，等等
+var width = window.innerWidth;
+var height = window.innerHeight;
+//Navigator 对象
+//可以用这个对象获取一些信息，比如来自用户摄像头的地理信息、用户偏爱的语言、多媒体流等等
+//document 对象 是载入窗口的实际页面
 
 
 // DOM的增删改查
@@ -405,7 +405,7 @@ div=document.querySelectorAll('div');
 //操作样式
 /*
 添加元素内部样式
-eldment.style.color = 'white';
+element.style.color = 'white';
 para.style.backgroundColor = 'black';
 para.style.padding = '10px';
 para.style.width = '250px';
@@ -421,17 +421,21 @@ removeAttribute('attrName'); */
 ///=================  闭包 =================================
 // 概念:闭包,就是指当一个内部函数被其外部函数之外的变量引用时,就形成了一个闭包,例如以下为最简单的闭包:
 function a(x) {
-  var b = function (y) { return x + y; }; //b为内部函数,a为b的外部函数
-  return b;  //返回这个内部函数
+  var b = function (y) {
+    return x + y;
+  }; //b为内部函数,a为b的外部函数
+  return b; //返回这个内部函数
 }
-c = a(5);  //执行a函数
+c = a(5); //执行a函数
 //执行函数a, 返回一个函数b.正常情况下,返回的都是一个值,但是这里返回是一个函数,这个函数依赖函数a执行才能产生.
 // a(5)执行时,会生产一个变量x,x指针指向值5.
 // 通常情况下函数执行完毕后, x变量会被垃圾处理机制回收.但是, 这里因为执行a函数后, 会生产一个新的函数, 而新的函数还会用到x变量的值.所以这个x没有被回收(指针已然指向5),而是继续存在.这样就形成了一个变量x常在的情况.
 //x变量因为只能通过返回的函数b引用,所以x具有了私有性.其他的方式都无法引用x变量.
 // 一般为了完整性, 可以这样写:
 function a(x) {
-  var b = function (y) { return x + y; }
+  var b = function (y) {
+    return x + y;
+  }
   window.c = b; //外部c变量引用了内部函数b,就形成一个闭包
 }
 
@@ -461,8 +465,8 @@ function a(x) {
  */
 //JavaScript 按照如下规则将变量转换成布尔类型：
 // 1.false、 0、 空字符串("")、 NaN、 null 和 undefined 被转换为 false
-Boolean('NaN');  //true
-Boolean(NaN);  //false
+Boolean('NaN'); //true
+Boolean(NaN); //false
 Boolean(null); //false
 isNaN(NaN); // true
 // ...
@@ -567,57 +571,58 @@ console.log(b); // 1
 
 // 5.跨浏览器事件处理程序
 var eventUtil = {
-    //添加句柄
-    addHandler: function (event, type, handler) {
-      if (event.addEventListener) {
-        event.addEventListener(type, handler, false);
-      } else if (event.attachEvent) {
-        event.attachEvent('on' + type, handler)
-      } else {
-        event['on' + type] = handler;
-      }
-    },
-    // 删除事件句柄
-    removeHandler: function (event, type, handler) {
-      if (event.removeEventListener) {
-        event.removeEventListener(type, handler, false);
-      } else if (event.detachEvent) {
-        event.detachEvent('on' + type, handler)
-      } else {
-        event['on' + type] = null;
-      }
-    },
-    //获取事件
-    getEvent: function (event) {
-      return event ? event : window.event; //IE8和IE以下浏览器事件对象引用为window.event
-    },
-    //获取事件类型
-    getType: function (event) {
-      return event.type;
-    },
-    //获取事件目标对象
-    getElement: function (event) {
-      return event.target || event.scrElevent;
-    },
-    //阻止事件默认行为
-    preventDefault: function (event) {
-      if (event.preventDefault) {
-        event.preventDefault();
-      } else {
-        event.returnValue = false;
-      }
-    },
-    //阻止事件冒泡行为
-    stopPropagation: function (event) {
-      if (event.stopPropagation) {
-        event.stopPropagation();
-      } else {
-        event.cancelBubble = true;
-      }
+  //添加句柄
+  addHandler: function (element, type, handler) {
+    if (element.addEventListener) {
+      element.addEventListener(type, handler, false);
+    } else if (element.attachEvent) {
+      element.attachEvent('on' + type, handler)
+    } else {
+      element['on' + type] = handler;
     }
+  },
+  // 删除事件句柄
+  removeHandler: function (element, type, handler) {
+    if (element.removeEventListener) {
+      element.removeEventListener(type, handler, false);
+    } else if (element.detachEvent) {
+      element.detachEvent('on' + type, handler)
+    } else {
+      element['on' + type] = null;
+    }
+  },
+  //获取事件
+  getEvent: function (event) {
+    return event ? event : window.event; //IE8和IE以下浏览器事件对象引用为window.event
+  },
+  //获取事件类型
+  getType: function (event) {
+    return event.type;
+  },
+  //获取事件目标对象
+  getElement: function (event) {
+    return event.target || event.scrElement;
+  },
+  //阻止事件默认行为
+  preventDefault: function (event) {
+    if (event.preventDefault) {
+      event.preventDefault();
+    } else {
+      event.returnValue = false;
+    }
+  },
+  //阻止事件冒泡行为
+  stopPropagation: function (event) {
+    if (event.stopPropagation) {
+      event.stopPropagation();
+    } else {
+      event.cancelBubble = true;
+    }
+  }
 }
 eventUtil.addHandler(btn, 'click', showMes);
 eventUtil.removeHandler(btn, 'click', showMes);
+btn.onclick = eventUtil.getevnet(event);
 
 // DOM 事件对象
 /*
@@ -641,3 +646,15 @@ console.log(x);
 x = (2, 3);
 console.log(x);
 // expected output: 3
+
+//变量的基本类型和引用类型
+// Undefined、 Null、 Boolean、 Number 和String 为基本类型
+// Object 为引用类型为引用类型
+function setName(obj) {
+  obj.name = "Nicholas";  //obj的指针还是指向person对象
+  obj = new Object();  //obj的指针指向了一个新的其他的对象,指针改变了.
+  obj.name = "Greg";
+}
+var person = new Object();
+setName(person); //person对象传递给函数的是一个person变量的指针的值,这个指针的值指向了堆区的新建对象.
+alert(person.name); //"Nicholas"
