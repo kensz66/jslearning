@@ -66,6 +66,12 @@
     console.log(book.edition);
     console.log(book.year);
     alert(typeof null); //返回object null被认为是一个空的对象,因为设置为空对象更为合理.比如将一个对象赋值为空时,这个null就是一个对象,只是什么都没有.
+
+    // 构造函数当
+    function test(){
+      function test1(){alert('hello, world!')};
+      return test1;
+    }
   </script>
 </body>
 

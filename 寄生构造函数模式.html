@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    function SpecialArray() {
+      //创建数组
+      var values = new Array();
+      //添加值
+      values.push.apply(this,arguments); //本身values是一个空的数组
+      //执行下来该语句等于
+      // values.push('reb','blue','green');
+      // values.push(arguments);
+      //添加方法
+      values.toPipedString = function () {
+        return this.join("|");
+      };
+      //返回数组
+      return values;
+    }
+    var colors = new SpecialArray("red", "blue", "green");
+    alert(colors.toPipedString())
+  </script>
+</body>
+
+</html>
