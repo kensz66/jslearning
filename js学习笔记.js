@@ -9,7 +9,7 @@ name = prompt();
 
 x = multiply(4, 5);
 
-localStorage.setItem(variable, 'name');
+localStorage.setItem(variable, 'ken');
 localStorage.getItem();
 
 para.addEventListener('click', updateName);
@@ -131,7 +131,7 @@ a.slice(2, 4); //返回 'cd'
 
 // 此外， 如果您知道要在某个字符之后提取字符串中的所有剩余字符， 则不必包含第二个参数， 而只需要包含要从中提取的字符位置 字符串中的其余字符。 尝试以下：
 var browserType = 'mozalla';
-// idexof用于在字符串中查找子字符串, 如果找不到, 则返回值 -1;
+// indexof用于在字符串中查找子字符串, 如果找不到, 则返回值 -1;
 if (browserType.indexOf('xyz') !== -1) {
   // do stuff with the string
 }
