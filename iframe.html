@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>iframe节点</title>
+  <!-- <script src="https://cdn.bootcss.com/jquery/3.3.1/core.js"></script> -->
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
+    .container {
+      margin: 0;
+      padding: 0;
+    }
+    iframe {
+      /* width: 100%;
+      height: 95vh; */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <iframe src="http://www.z-ai.net" frameborder="0" ></iframe>
+  </div>
+  <p></p>
+  <script>
+    var iframe = document.querySelector('iframe');
+    function iwindow(element){
+      element.scrolling = 'auto';
+      element.style.width = '100%';
+      element.style.height = (window.innerHeight- parseInt(getScrollYBarWidth())*2 )+ 'px' ;
+
+    }
+    iwindow(iframe);
+    window.addEventListener('resize',function(){
+      iwindow(iframe);
+    });
+
+    function getScrollYBarWidth(){
+      var  ele = document.createElement('div');
+      var styles = {
+        width: '100px',
+        height: '100px',
+        overflowY: 'scroll'
+      }
+
+      for ( var i in styles){
+        // i = eval(i);
+        ele.style[i]= styles[i];
+        console.log(typeof i +': '+ i);
+      }
+      document.body.appendChild(ele);
+      scrollYBarWidth = ele.offsetWidth-ele.clientWidth;
+      console.log(scrollYBarWidth);
+      ele.remove();
+      return scrollYBarWidth;
+    }
+    </script>
+</body>
+</html>

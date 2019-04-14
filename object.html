@@ -20,13 +20,114 @@
       };
     };
     var yangnan = new Person(true, 20, 'woman'); //实例化Person对象
-    console.log(yangnan); //实例是赋值后的对象
-    console.log(yangnan.gender);
-    console.log(yangnan.age);
-    console.log(yangnan.getGender);
-    console.log(yangnan.prototype);
+    Person.prototype.sayhello = function () {
+      alert('hello');
+    };
+    // yangnan = function () { console.log(this.age) };
+    // console.log(yangnan); //实例是赋值后的对象
+    // console.log(yangnan.gender);
+    // console.log(yangnan.age);
+    // console.log(yangnan.getGender);
+    // console.log(yangnan.prototype);
+
+    /* ===============
+    ::::: 创建对象
+    ================ */
+    // 1.工厂模式
+    function createOPerson(name, age, job) {
+      var o = {};
+      o.name = name;
+      o.age = age;
+      o.job = job;
+      o.sayName = function () { alert(this.name); }
+      return o;
+    }
+    var person1 = createOPerson('ken', 24, 'engineer');
+    // console.log(person1);
+    // person1.sayName();
+
+    // 2. 构造函数
+    function Person2(name, age, job) {
+      this.name = name;
+      this.age = age;
+      this.job = job;
+      this.sayName = function () {
+        alert(this.name);
+      }
+    }
+    var person2 = new Person2('Jack', 30, 'teacher');
+    // alert(person2.name);
+
+    //原型模式
+
+    function Person3() { }
+    Person3.prototype.name = 'ken';
+    Person3.prototype.age = 44;
+    Person3.prototype.job = 'saler';
+    Person3.prototype.sayName = function () {
+      alert(this.name);
+    }
+
+    var person3 = new Person3();
+    Person3.prototype.sex = 'male';
+    person3.name = 'yys';
+
+    console.log(Person3.prototype.isPrototypeOf(person3)); //判断对象的原型是否指向原型函数的原型属性
+    console.log(Object.getPrototypeOf(person3)); //获取对象的原型
+
+
+    var a = 1000 - 350;
+    console.log(a);
+
   </script>
 
+  <script>
+    var a = 1;
+    var obj = { x: 10 }
+    var fn = function () {
+      console.log(this);
+      console.log(this.a);
+    }
+    fn.call(obj);
+    console.log(this);
+  </script>
+
+  <script>
+    var nums = [1, 5, 9];
+    var temp = [];
+    nums.map(function (i) {
+      if (i % 2 == 0) {
+        temp.push(i);
+      }
+    });
+    console.log(temp);
+    var even = nums.filter(function (i) { i % 2 === 0; });
+    console.log(even);
+
+    var roots = nums.map(Math.sqrt);
+    var roots1 = nums.map(function (val) {
+      return Math.sqrt(val);
+    })
+    console.log(roots1);
+
+  </script>
+
+  <script>
+    var x = 100;
+    function fn(x){
+      return function(){
+        console.log(x*2);
+      }
+    }
+    var f1=fn(5);
+    console.log(f1.toString());
+    console.log(fn);
+    var f2=fn(10);
+    console.log(f2.toString());
+    f1();
+    f2();
+  </script>
+  <!-- //任何对象的隐式原型一定指向其构造函数的prototype的原型, 构造函数的原型对象的隐式原型一定指向Object的原型对象. Object的原型对象的隐式原型只向空. Object的隐式原型指向Function的原型对象. -->
 </body>
 
 </html>
