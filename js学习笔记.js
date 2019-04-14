@@ -338,7 +338,6 @@ Test.prototype.y = function () {
 6.构造函数的原型对象中包括自己本身构造函数和Object原型对象.
 7.总结以上:每个对象的内容可以包括三方面:1:由程序员创建的项,2:由对象的类型本身带的项,3:由对象Object自带的项.
 */
-13970255999
 //============构造函数的继承================
 function Person(name, age, gender) {
   this.name = name;
