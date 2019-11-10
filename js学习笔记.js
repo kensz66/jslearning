@@ -73,7 +73,7 @@ typeof null; // returns "object"
 
 
 //>>>>>>>>>>> in 关系操作符<<<<<<<<<<<<<<<<
-// 用于判断一个对象是否有某个属性或者某个索引值(只数组),存在返回true,否则返回false
+// 用于判断一个对象是否有某个属性或者某个索引值(指数组),存在返回true,否则返回false
 /*   // Arrays
   var trees = new Array("redwood", "bay", "cedar", "oak", "maple");
   0 in trees; // returns true
