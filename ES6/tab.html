@@ -2,9 +2,120 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>tab栏目</title>
 </head>
+<style>
+    /*通用设置*/
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    a {
+        color: black;
+        text-decoration: none;
+    }
+
+    h2 {
+        text-align: center;
+        margin: 1rem auto
+    }
+
+    #tab {
+        border: 1px solid lightgrey;
+        width: 80%;
+        height: 20rem;
+        margin: auto;
+
+    }
+
+    /*定义tab头部*/
+    #tab_header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        align-content: center;
+    }
+
+    .tab_list {
+        border-bottom: 1px solid lightgray;
+        height: 2rem;
+        margin: 0;
+
+    }
+
+    .tab_list > li {
+        width: 4rem;
+        border: 1px solid lightpink;
+        height: 100%;
+        position: relative;
+        list-style: none;
+        display: inline-block;
+        margin: 0;
+
+    }
+
+    .tab_list > li > a {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        display: inline;
+    }
+
+    /*定义+*/
+    #add_tab {
+        display: block;
+        position: relative;
+        width: 1rem;
+        height: 1rem;
+        border: 1px solid lightgrey;
+        margin-right: .7rem;
+
+    }
+
+    #add_tab a {
+
+        font-size: .8rem;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        /*display: inline;*/
+
+    }
+
+    /*定义tab body*/
+    section {
+        display: none;
+    }
+
+    /*定义控制类*/
+    .tab_head_active, .tab_body_active {
+        display: block;
+    }
+
+</style>
 <body>
-$END$
+<h2>Js面向对象: 动态添加标签页</h2>
+<div id="tab">
+
+    <div id="tab_header">
+        <ul class="tab_list">
+            <li class="tab_head_active"><a href="#">tab1</a>
+            </li><li id="tab2"><a href="#">tab2</a>
+            </li>
+        </ul>
+        <span id="add_tab"><a href="#">+</a></span>
+    </div>
+
+    <div class="tab_body">
+        <section class="tab_body_active">body1</section>
+        <section>body2</section>
+    </div>
+</div>
+<script src="tab.js"></script>
+
 </body>
 </html>

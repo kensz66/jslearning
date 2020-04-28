@@ -257,7 +257,7 @@ object.name = 'kate';
 
 
 // ++++++++++++++++++++创建对象的方式++++++++++++++++++++
-// 1.通过构造创建对象
+// 1.通过构造函数创建对象
 function Person(name, age, gender) {
   this.name = name;
   this.age = age;
@@ -306,7 +306,7 @@ var nodes = {
 // 通过一下方式,就可以通过nodes.a,nodes.div,nodes.btn当成变量来使用.
 
 
-//对函数的理解:每个函数都是对象,包含以下:length:0,name:函数名,caller以及arguments等属性.还有一个特殊属性prototype,这个特殊的成员其实是一个构造函数,里面包括许多的属性和方法.这些属性和方法可以供本函数对象使用.
+//对函数的理解:每个函数都是对象,包含以下:length:（长度为形参的个数）,name:函数名,caller以及arguments等属性.还有一个特殊属性prototype,这个特殊的成员其实是一个构造函数,里面包括许多的属性和方法.这些属性和方法可以供本函数对象使用.
 
 /* 注意: 一种常见的对象定义模式是, 在构造体(函数体)中定义属性, 在prototype属性上定义方法.如此构造器只包含属性定义, 而方法则分装在不同的代码块中, 代码更具可读性.例如: */
 // 构造器及其属性定义
@@ -440,7 +440,7 @@ function a(x) {
 
 
 // 闭包的高级写法 :
-//参考: http://www.xurry.top/2017/09                                  /06/javascript-closure/
+//参考: http://www.xurry.top/2017/09/06/javascript-closure/
 (function (document) {
   var viewport;
   var obj = {

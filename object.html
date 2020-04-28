@@ -43,6 +43,9 @@
       return o;
     }
     var person1 = createOPerson('ken', 24, 'engineer');
+    //缺点: 无法确定对象是哪个对象的实例
+
+
     // console.log(person1);
     // person1.sayName();
 
@@ -55,6 +58,18 @@
         alert(this.name);
       }
     }
+
+    function Box(name,age){
+      this.name =name;
+      this.age = age;
+      this.run = function () {
+          return this.name+this.age;
+      }
+    }
+    box1 = new Box('ken',24);
+    window.alert(box1.run())
+
+
     var person2 = new Person2('Jack', 30, 'teacher');
     // alert(person2.name);
 
@@ -127,7 +142,7 @@
     f1();
     f2();
   </script>
-  <!-- //任何对象的隐式原型一定指向其构造函数的prototype的原型, 构造函数的原型对象的隐式原型一定指向Object的原型对象. Object的原型对象的隐式原型只向空. Object的隐式原型指向Function的原型对象. -->
+  <!-- //任何对象的隐式原型一定指向其构造函数的prototype的原型, 构造函数的原型对象的隐式原型一定指向Object的原型对象. Object的原型对象的隐式原型指向null. Object的隐式原型指向Function的原型对象. -->
 </body>
 
 </html>
